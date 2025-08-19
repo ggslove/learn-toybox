@@ -35,6 +35,9 @@ config MDEV_CONF
 
 #include "toys.h"
 #include "lib/xregcomp.h"
+#ifndef makedev
+#define makedev(major, minor) (((major) << 8) | ((minor) & 0xff))
+#endif
 
 // mknod in /dev based on a path like "/sys/block/hda/hda1"
 static void make_device(char *path)
